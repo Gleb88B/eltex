@@ -52,6 +52,7 @@ float divv(int n, ...)
     result = va_arg(fact, double);
     for (int i = 0; i < n - 1; i++)
     {
+        
         result /= va_arg(fact, double);
     }
     va_end(fact);

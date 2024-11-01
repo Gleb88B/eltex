@@ -255,7 +255,7 @@ void list_contacts()
 {
     if (contact_count == 0)
     {
-        printf("Список пуст");
+        printf("Список пуст\n");
         return;
         
     }
@@ -290,7 +290,7 @@ void edit_contact(int id)
         int exitloop = 0;
         char edit[10], num[10];
         edit[0] = '\0';
-        printf("Выберите поле для редактирования:\n0. Выход\n1. Имя: %s (обязательное поле)\n2. Фамилия: %s(обязательное поле)\n3. Отчество: %s\n4. Место работы: %s\n5. Должность: %s\n",
+        printf("Выберите поле для редактирования:\n0. Выход\n1. Имя: %s (обязательное поле)\n2. Фамилия: %s (обязательное поле)\n3. Отчество: %s\n4. Место работы: %s\n5. Должность: %s\n",
          contacts[id].persons.name, contacts[id].persons.surname, contacts[id].persons.patronymic, contacts[id].jobs.place, contacts[id].jobs.post);
         printf("6. Номера телефона:\n");
         for (int j = 0; contacts[id].phones[j][0] != '\0'; j++)

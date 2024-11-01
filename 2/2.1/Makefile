@@ -1,1 +1,2 @@
-gcc telephone.c strcheck.c -o telephone
+telephone:
+	gcc telephone.c strcheck.c -o telephone
