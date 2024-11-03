@@ -21,6 +21,7 @@ float lib_func(char funcName[], int n, double *args)
         fputs(dlerror(), stderr);
         exit(1);
     }
+    dlclose(bib);
     return func(n, args[0], args[1], args[2], args[3], args[4]);
 
 }

@@ -30,6 +30,8 @@ Contact contacts[MAX_CONTACTS];
 int contact_count = 0;
 int find[10] = {-1};
 
+
+
 void show_contact(int id)
 {
     if (id == -1)
@@ -149,103 +151,19 @@ int find_contact()
     }
 }
 
-void add_contact()
+void add_contact(Contact newContact)
 {
-    if (contact_count >= MAX_CONTACTS)
+    if (isempty(newContact.persons.name) == 1)
     {
-        printf("Достигнут максимум количества сохраненных контактов.\n");
+        printf("Поле имя должно быть введено!\n");
         return;
     }
-    Contact newContact;
-    while (1){
-        printf("Введите имя (обязательно): ");
-        fgets(newContact.persons.name, sizeof(newContact.persons.name), stdin);
-        delete_n(newContact.persons.name);
-        if (isempty(newContact.persons.name) == 1)
-        {
-            printf("Поле имя должно быть введено!\n");
-        }
-        else{
-        break;
-        }
-    }
-    while (1){
-        printf("Введите фамилию (обязательно): ");
-        fgets(newContact.persons.surname, sizeof(newContact.persons.surname), stdin);
-        delete_n(newContact.persons.surname);
-        if (isempty(newContact.persons.surname) == 1)
-        {
-            printf("Поле фамилия должно быть введено!\n");
-        }
-        else{
-        break;
-        }
-    }
-    printf("Введите отчество (необязательно, нажмите Enter чтобы пропустить): ");
-    fgets(newContact.persons.patronymic, sizeof(newContact.persons.patronymic), stdin);
-    delete_n(newContact.persons.patronymic);
-    printf("Введите место работы (необязательно, нажмите Enter чтобы пропустить): ");
-    fgets(newContact.jobs.place, sizeof(newContact.jobs.place), stdin);
-    delete_n(newContact.jobs.place);
-    printf("Введите должность (необязательно, нажмите Enter чтобы пропустить): ");
-    fgets(newContact.jobs.post, sizeof(newContact.jobs.post), stdin);
-    delete_n(newContact.jobs.post);
-    for (int i = 0; i < 5; i++)
+    if (isempty(newContact.persons.surname) == 1)
     {
-        printf("Введите номер телефона, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
-        fgets(newContact.phones[i], sizeof(newContact.phones[i]), stdin);
-        delete_n(newContact.phones[i]);
-        if (isempty(newContact.phones[i]) == 1)
-        {
-            for (int j = i; j < 5; j++)
-            {
-                newContact.phones[j][0] = '\0';
-            }
-            break;
-        }
+        printf("Поле фамилия должно быть введено!\n");
+        return;
     }
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Введите адрес электронной почты, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
-        fgets(newContact.emails[i], sizeof(newContact.emails[i]), stdin);
-        delete_n(newContact.emails[i]);
-        if (isempty(newContact.emails[i]) == 1)
-        {
-            for (int j = i; j < 5; j++)
-            {
-                newContact.emails[j][0] = '\0';
-            }
-            break;
-        }
-    }
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Введите ссылку на соцальную сеть, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
-        fgets(newContact.social_media[i], sizeof(newContact.social_media[i]), stdin);
-        delete_n(newContact.social_media[i]);
-        if (isempty(newContact.social_media[i]) == 1)
-        {
-            for (int j = i; j < 5; j++)
-            {
-                newContact.social_media[j][0] = '\0';
-            }
-            break;
-        }
-    }
-    for (int i = 0; i < 5; i++)
-    {
-        printf("Введите ссылку на профиль месенджера, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
-        fgets(newContact.messenger[i], sizeof(newContact.messenger[i]), stdin);
-        delete_n(newContact.messenger[i]);
-        if (isempty(newContact.messenger[i]) == 1)
-        {
-            for (int j = i; j < 5; j++)
-            {
-                newContact.messenger[j][0] = '\0';
-            }
-            break;
-        }
-    }
+
     contacts[contact_count++] = newContact;
     printf("Контакт добавлен!\n");
     show_contact(contact_count-1);
@@ -506,7 +424,84 @@ int main()
         switch (func[0])
         {
             case '1':
-                add_contact();
+                if (contact_count >= MAX_CONTACTS)
+                {
+                    printf("Достигнут максимум количества сохраненных контактов.\n");
+                    break;
+                }
+                Contact newContact;
+                printf("Введите имя (обязательно): ");
+                fgets(newContact.persons.name, sizeof(newContact.persons.name), stdin);
+                delete_n(newContact.persons.name);
+                printf("Введите фамилию (обязательно): ");
+                fgets(newContact.persons.surname, sizeof(newContact.persons.surname), stdin);
+                delete_n(newContact.persons.surname);
+                printf("Введите отчество (необязательно, нажмите Enter чтобы пропустить): ");
+                fgets(newContact.persons.patronymic, sizeof(newContact.persons.patronymic), stdin);
+                delete_n(newContact.persons.patronymic);
+                printf("Введите место работы (необязательно, нажмите Enter чтобы пропустить): ");
+                fgets(newContact.jobs.place, sizeof(newContact.jobs.place), stdin);
+                delete_n(newContact.jobs.place);
+                printf("Введите должность (необязательно, нажмите Enter чтобы пропустить): ");
+                fgets(newContact.jobs.post, sizeof(newContact.jobs.post), stdin);
+                delete_n(newContact.jobs.post);
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("Введите номер телефона, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
+                    fgets(newContact.phones[i], sizeof(newContact.phones[i]), stdin);
+                    delete_n(newContact.phones[i]);
+                    if (isempty(newContact.phones[i]) == 1)
+                    {
+                        for (int j = i; j < 5; j++)
+                        {
+                            newContact.phones[j][0] = '\0';
+                        }
+                        break;
+                    }
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("Введите адрес электронной почты, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
+                    fgets(newContact.emails[i], sizeof(newContact.emails[i]), stdin);
+                    delete_n(newContact.emails[i]);
+                    if (isempty(newContact.emails[i]) == 1)
+                    {
+                        for (int j = i; j < 5; j++)
+                        {
+                            newContact.emails[j][0] = '\0';
+                        }
+                        break;
+                    }
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("Введите ссылку на соцальную сеть, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
+                    fgets(newContact.social_media[i], sizeof(newContact.social_media[i]), stdin);
+                    delete_n(newContact.social_media[i]);
+                    if (isempty(newContact.social_media[i]) == 1)
+                    {
+                        for (int j = i; j < 5; j++)
+                        {
+                            newContact.social_media[j][0] = '\0';
+                        }
+                        break;
+                    }
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    printf("Введите ссылку на профиль месенджера, введено %d из 5 (необязательно, нажмите Enter чтобы пропустить): ", i);
+                    fgets(newContact.messenger[i], sizeof(newContact.messenger[i]), stdin);
+                    delete_n(newContact.messenger[i]);
+                    if (isempty(newContact.messenger[i]) == 1)
+                    {
+                        for (int j = i; j < 5; j++)
+                        {
+                            newContact.messenger[j][0] = '\0';
+                        }
+                        break;
+                    }
+                }
+                add_contact(newContact);
                 break;
             case '2':
                 show_contact(find_contact());
