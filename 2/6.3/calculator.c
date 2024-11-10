@@ -5,10 +5,13 @@
 #include <dlfcn.h>
 #include <errno.h>
 
+
+
 float lib_func(char funcName[], int n, double *args)
 {
     float (*func)(int, ...);
     void *bib;
+    float res = 0;
     bib = dlopen("/home/gleb/eltex/2/6.3/libariph.so", RTLD_NOW);
     if (!bib)
     {
@@ -21,18 +24,21 @@ float lib_func(char funcName[], int n, double *args)
         fputs(dlerror(), stderr);
         exit(1);
     }
+    res = func(n, args[0], args[1], args[2], args[3], args[4]);
     dlclose(bib);
-    return func(n, args[0], args[1], args[2], args[3], args[4]);
+    return res;
 
 }
 
 int main(int argc, char *argv[])
 {
+   
     if (argc - 1 < 2 || argc - 1 > 5)
     {
         printf("Неверное количество аргументов\n");
         exit(1);
     }
+    
     char func[10];
     float res;
     double args[argc-1];
@@ -55,4 +61,5 @@ int main(int argc, char *argv[])
         res = lib_func(func, argc-1, args);
         printf("Результат %f\n", res);
     }
+    
 }

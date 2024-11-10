@@ -46,7 +46,7 @@ int main (int argc, char *argv[])
             diffCount++;
         }
     }
-    printf("Пакеты попавште в сеть: %d\n", sameCount);
-    printf("Пакеты не попавшие в сеть: %d\n", diffCount);
+    printf("Пакеты попавште в сеть: %d %.2f%%\n", sameCount, (float)sameCount/n*100);
+    printf("Пакеты не попавшие в сеть: %d %.2f%%\n", diffCount, (float)diffCount/n*100);
 
 }
