@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include "strcheck.h"
 
+
 void delete_n(char *str)
 {
     for (int i = 0; str[i] != '\0'; i++)
