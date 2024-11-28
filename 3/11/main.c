@@ -14,6 +14,11 @@
 
 
 int main(int argc, char* argv[]) {
+    if (argc != 2)
+    {
+        printf("Введите количество процессов\n");
+        exit(-1);
+    }
     int pid[atoi(argv[1])];
     sem_t *sid;
     const char *filename = "shared_file.txt";
