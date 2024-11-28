@@ -86,6 +86,7 @@ int main() {
                 case '3':
                     kill(pid, SIGKILL); 
                     wait(NULL);
+                    sem_close(sid);
                     sem_unlink(SEM_NAME);
                     exit(1);
             }
@@ -117,7 +118,6 @@ int main() {
             }
             sleep(1);
         }
-        sem_unlink(SEM_NAME);
     }
 
     return 0;
